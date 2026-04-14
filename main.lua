@@ -1,6 +1,11 @@
 local dir_path = arg[1]
 local dir_list = ""
-local files_format = arg[2]
+local season_format = arg[2]
+local episode_format = arg[3]
+local data = {}
+local database_path = dir_path .. "/.database.json"
+local episode_comma_flag = false
+local season_comma_flag = false
 
 if dir_path == nil then
 	io.stderr:write("\n\27[31mPlease give the series directory path as an argument\nUse -h or --help for mor info\n\n")
