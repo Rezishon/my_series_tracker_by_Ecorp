@@ -38,16 +38,12 @@ tmp_dir_list:close()
 
 -- TODO: check if files format inserted =>
 -- place it in the following gmatch
--- TODO: save data in a hidden file
 -- TODO: if metadata file presents =>
 -- take the data from there, needed to
 -- handle things on format inserted or not
 -- and overwrite or not
 -- TODO: Check how to know what length of video
 -- does watched automatically
-local tb = {}
-for match in string.gmatch(dir_list, "%s*E03%s*") do
-	table.insert(tb, match)
 end
 
 for _, v in ipairs(tb) do
