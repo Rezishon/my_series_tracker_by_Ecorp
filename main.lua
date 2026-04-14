@@ -82,3 +82,5 @@ local tmp_json_file = io.popen(
 )
 database:write(tmp_json_file:read("*a"))
 
+database:close()
+tmp_json_file:close()
