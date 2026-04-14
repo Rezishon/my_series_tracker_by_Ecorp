@@ -14,6 +14,9 @@ local comma_handler = function(database, comma_flag)
 	return true
 end
 
+-- NOTE: This is a path fixer
+database_path = database_path:gsub("%s*//%s*", "/")
+
 if dir_path == nil then
 	io.stderr:write("\n\27[31mPlease give the series directory path as an argument\nUse -h or --help for mor info\n\n")
 	os.exit(1, true)
