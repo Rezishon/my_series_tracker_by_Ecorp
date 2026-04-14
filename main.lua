@@ -7,6 +7,13 @@ local database_path = dir_path .. "/.database.json"
 local episode_comma_flag = false
 local season_comma_flag = false
 
+local comma_handler = function(database, comma_flag)
+	if comma_flag then
+		database:write(",")
+	end
+	return true
+end
+
 if dir_path == nil then
 	io.stderr:write("\n\27[31mPlease give the series directory path as an argument\nUse -h or --help for mor info\n\n")
 	os.exit(1, true)
