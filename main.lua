@@ -44,6 +44,16 @@ tmp_dir_list:close()
 -- and overwrite or not
 -- TODO: Check how to know what length of video
 -- does watched automatically
+--
+for season_match in string.gmatch(dir_list, season_format) do
+	for full_match in string.gmatch(dir_list, season_match .. episode_format) do
+		for episode_match in string.gmatch(full_match, episode_format) do
+			if data[season_match] == nil then
+				data[season_match] = {}
+			end
+			data[season_match][episode_match] = false
+		end
+	end
 end
 
 for _, v in ipairs(tb) do
