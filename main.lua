@@ -56,8 +56,4 @@ for season_match in string.gmatch(dir_list, season_format) do
 	end
 end
 
-for _, v in ipairs(tb) do
-	print(v)
 end
--- end
--- print(string.match(dir_list, "^Mm%s*"))
