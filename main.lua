@@ -56,4 +56,5 @@ for season_match in string.gmatch(dir_list, season_format) do
 	end
 end
 
+local database = io.open(database_path, "w")
 end
