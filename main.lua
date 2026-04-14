@@ -57,4 +57,21 @@ for season_match in string.gmatch(dir_list, season_format) do
 end
 
 local database = io.open(database_path, "w")
+database:write("{\n")
+for i, v in pairs(data) do
+	season_comma_flag = comma_handler(database, season_comma_flag)
+
+	database:write('"' .. i .. '"' .. ":{" .. "\n")
+
+	for ii, vv in pairs(v) do
+		episode_comma_flag = comma_handler(database, episode_comma_flag)
+
+		database:write('"' .. ii .. '"' .. ":")
+		database:write('{ "watched" : false, "timeOfWatch" : "00:00" }')
+	end
+	episode_comma_flag = false
+
+	database:write("\n}")
 end
+database:write("\n}")
+
