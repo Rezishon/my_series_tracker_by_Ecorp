@@ -75,3 +75,10 @@ for i, v in pairs(data) do
 end
 database:write("\n}")
 
+database = io.open(database_path, "w+")
+local tmp_json_file = io.popen(
+	"jq 'to_entries | sort_by(.key) | from_entries | .[] |= (to_entries | sort_by(.key) | from_entries)' "
+		.. database_path
+)
+database:write(tmp_json_file:read("*a"))
+
