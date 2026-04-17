@@ -29,6 +29,14 @@ Repository.path_fixer = function(path)
 	return path:gsub("%s*//%s*", "/")
 end
 
+Repository.list_of_dir = function(dir_path)
+	local dir_listing = io.popen("ls " .. dir_path)
+	local dir_list = dir_listing:read("*a")
+	dir_listing:close()
+
+	return dir_list
+end
+
 Repository.comma_handler = function(database, comma_flag)
 	if comma_flag then
 		database:write(",")

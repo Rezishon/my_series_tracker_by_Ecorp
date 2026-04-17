@@ -12,6 +12,7 @@ local dir_list = ""
 local data = {}
 
 
+dir_list = repo.list_of_dir(dir_path)
 
 if dir_path == nil then
 	io.stderr:write("\n\27[31mPlease give the series directory path as an argument\nUse -h or --help for mor info\n\n")
@@ -27,10 +28,6 @@ if io.open(dir_path, "r") == nil then
 	io.stderr:write("\n\27[31mInvalid directory path given: " .. dir_path .. "\n\n")
 	os.exit(1, true)
 end
-
-local tmp_dir_list = io.popen("ls " .. dir_path)
-dir_list = tmp_dir_list:read("*a")
-tmp_dir_list:close()
 
 -- TODO: check if files format inserted =>
 -- place it in the following gmatch
