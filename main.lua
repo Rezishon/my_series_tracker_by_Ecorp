@@ -14,21 +14,6 @@ local data = {}
 
 dir_list = repo.list_of_dir(dir_path)
 
-if dir_path == nil then
-	io.stderr:write("\n\27[31mPlease give the series directory path as an argument\nUse -h or --help for mor info\n\n")
-	os.exit(1, true)
-end
-
-if dir_path:match("--help=") or dir_path:match("-h") then
-	io.stdout:write("\nargs:\n1: series directory path\n2(optional): files name format\n\n")
-	os.exit(1, true)
-end
-
-if io.open(dir_path, "r") == nil then
-	io.stderr:write("\n\27[31mInvalid directory path given: " .. dir_path .. "\n\n")
-	os.exit(1, true)
-end
-
 -- TODO: check if files format inserted =>
 -- place it in the following gmatch
 -- TODO: if metadata file presents =>
