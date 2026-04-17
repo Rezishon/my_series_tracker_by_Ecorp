@@ -79,6 +79,16 @@ Repository.season_and_episode_structure_writer = function(database, data, level_
 	database:write("\n}")
 end
 
+Repository.metadata_structure_writer = function(metadata, data, level_one_comma_flag)
+	metadata:write("{\n")
+	for i, v in pairs(data) do
+		level_one_comma_flag = Repository.comma_handler(metadata, level_one_comma_flag)
+
+		metadata:write('"' .. i .. '"' .. ":" .. '"' .. v .. '"')
+	end
+	metadata:write("\n}")
+end
+
 Repository.database_file_organizer = function(file, database_path)
 	local json_file = io.popen(
 		"jq 'to_entries | sort_by(.key) | from_entries | .[] |= (to_entries | sort_by(.key) | from_entries)' "
