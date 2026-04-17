@@ -59,4 +59,24 @@ Repository.comma_handler = function(database, comma_flag)
 	return true
 end
 
+Repository.season_and_episode_structure_writer = function(database, data, level_one_comma_flag, level_two_comma_flag)
+	database:write("{\n")
+	for i, v in pairs(data) do
+		level_one_comma_flag = Repository.comma_handler(database, level_one_comma_flag)
+
+		database:write('"' .. i .. '"' .. ":{" .. "\n")
+
+		for ii, vv in pairs(v) do
+			level_two_comma_flag = Repository.comma_handler(database, level_two_comma_flag)
+
+			database:write('"' .. ii .. '"' .. ":")
+			database:write('{ "watched" : false, "timeOfWatch" : "00:00" }')
+		end
+		level_two_comma_flag = false
+
+		database:write("\n}")
+	end
+	database:write("\n}")
+end
+
 return Repository
