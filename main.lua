@@ -19,16 +19,13 @@ data = repo.season_and_episode_structure_builder(dir_list, season_pattern, episo
 local database = io.open(database_path, "w")
 repo.season_and_episode_structure_writer(database, data, level_one_comma_flag, level_two_comma_flag)
 
-
-
-
-
 database = io.open(database_path, "w+")
-local tmp_json_file = io.popen(
-	"jq 'to_entries | sort_by(.key) | from_entries | .[] |= (to_entries | sort_by(.key) | from_entries)' "
-		.. database_path
-)
-database:write(tmp_json_file:read("*a"))
+repo.database_file_organizer(database, database_path)
+
+database:close()
+
+
+
 
 database:close()
 tmp_json_file:close()

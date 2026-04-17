@@ -79,4 +79,13 @@ Repository.season_and_episode_structure_writer = function(database, data, level_
 	database:write("\n}")
 end
 
+Repository.database_file_organizer = function(file, database_path)
+	local json_file = io.popen(
+		"jq 'to_entries | sort_by(.key) | from_entries | .[] |= (to_entries | sort_by(.key) | from_entries)' "
+			.. database_path
+	)
+	file:write(json_file:read("*a"))
+	json_file:close()
+end
+
 return Repository
