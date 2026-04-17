@@ -1,3 +1,5 @@
+local repo = require("repository")
+
 local dir_path = arg[1]
 local dir_list = ""
 local season_format = arg[2]
