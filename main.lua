@@ -24,6 +24,10 @@ repo.database_file_organizer(database, database_path)
 
 database:close()
 
+local metadata_table = {
+	SeasonPattern = season_pattern,
+	EpisodePattern = episode_pattern,
+}
 
 
 
