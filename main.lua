@@ -2,11 +2,11 @@ local repo = require("repository")
 
 local dir_path = arg[1]
 repo.dir_path_validator(dir_path)
+local season_pattern = arg[2]
+local episode_pattern = arg[3]
 local database_path = repo.path_fixer(repo.database_path(dir_path))
 local metadata_path = repo.path_fixer(repo.metadata_path(dir_path))
 local dir_list = ""
-local season_format = arg[2]
-local episode_format = arg[3]
 local data = {}
 local database_path = dir_path .. "/.database.json"
 local episode_comma_flag = false
@@ -60,6 +60,7 @@ for season_match in string.gmatch(dir_list, season_format) do
 		end
 	end
 end
+data = repo.season_and_episode_structure_builder(dir_list, season_pattern, episode_pattern)
 
 local database = io.open(database_path, "w")
 database:write("{\n")
