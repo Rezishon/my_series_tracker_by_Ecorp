@@ -6,11 +6,11 @@ local season_pattern = arg[2]
 local episode_pattern = arg[3]
 local database_path = repo.path_fixer(repo.database_path(dir_path))
 local metadata_path = repo.path_fixer(repo.metadata_path(dir_path))
+local level_one_comma_flag = false
+local level_two_comma_flag = false
 local dir_list = ""
 local data = {}
 local database_path = dir_path .. "/.database.json"
-local episode_comma_flag = false
-local season_comma_flag = false
 
 local comma_handler = function(database, comma_flag)
 	if comma_flag then
