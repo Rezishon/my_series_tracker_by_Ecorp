@@ -10,7 +10,6 @@ local level_one_comma_flag = false
 local level_two_comma_flag = false
 local dir_list = ""
 local data = {}
-local database_path = dir_path .. "/.database.json"
 
 local comma_handler = function(database, comma_flag)
 	if comma_flag then
