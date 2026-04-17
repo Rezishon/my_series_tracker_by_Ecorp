@@ -37,6 +37,21 @@ Repository.list_of_dir = function(dir_path)
 	return dir_list
 end
 
+Repository.season_and_episode_structure_builder = function(dir_list, season_pattern, episode_pattern)
+	local data = {}
+	for season_match in string.gmatch(dir_list, season_pattern) do
+		for full_match in string.gmatch(dir_list, season_match .. episode_pattern) do
+			for episode_match in string.gmatch(full_match, episode_pattern) do
+				if data[season_match] == nil then
+					data[season_match] = {}
+				end
+				data[season_match][episode_match] = false
+			end
+		end
+	end
+	return data
+end
+
 Repository.comma_handler = function(database, comma_flag)
 	if comma_flag then
 		database:write(",")

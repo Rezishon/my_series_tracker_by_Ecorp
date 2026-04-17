@@ -14,16 +14,6 @@ local data = {}
 
 dir_list = repo.list_of_dir(dir_path)
 
-for season_match in string.gmatch(dir_list, season_format) do
-	for full_match in string.gmatch(dir_list, season_match .. episode_format) do
-		for episode_match in string.gmatch(full_match, episode_format) do
-			if data[season_match] == nil then
-				data[season_match] = {}
-			end
-			data[season_match][episode_match] = false
-		end
-	end
-end
 data = repo.season_and_episode_structure_builder(dir_list, season_pattern, episode_pattern)
 
 local database = io.open(database_path, "w")
