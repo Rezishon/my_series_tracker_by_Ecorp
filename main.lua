@@ -17,6 +17,7 @@ dir_list = repo.list_of_dir(dir_path)
 data = repo.season_and_episode_structure_builder(dir_list, season_pattern, episode_pattern)
 
 local database = io.open(database_path, "w")
+repo.season_and_episode_structure_writer(database, data, level_one_comma_flag, level_two_comma_flag)
 
 
 
