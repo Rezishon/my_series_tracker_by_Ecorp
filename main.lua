@@ -2,6 +2,7 @@ local repo = require("repository")
 
 local dir_path = arg[1]
 local database_path = repo.path_fixer(repo.database_path(dir_path))
+local metadata_path = repo.path_fixer(repo.metadata_path(dir_path))
 local dir_list = ""
 local season_format = arg[2]
 local episode_format = arg[3]
