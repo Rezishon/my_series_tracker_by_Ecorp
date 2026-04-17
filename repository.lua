@@ -98,4 +98,10 @@ Repository.database_file_organizer = function(file, database_path)
 	json_file:close()
 end
 
+Repository.metadata_file_organizer = function(file, metadata_path)
+	local json_file = io.popen("jq 'to_entries | sort_by(.key) | from_entries' " .. metadata_path)
+	file:write(json_file:read("*a"))
+	json_file:close()
+end
+
 return Repository

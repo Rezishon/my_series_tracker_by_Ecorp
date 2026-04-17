@@ -29,7 +29,12 @@ local metadata_table = {
 	EpisodePattern = episode_pattern,
 }
 
+local metadata = io.open(metadata_path, "w")
+repo.metadata_structure_writer(metadata, metadata_table, level_one_comma_flag)
 
+metadata = io.open(metadata_path, "w+")
+repo.metadata_file_organizer(metadata, metadata_path)
 
 database:close()
 tmp_json_file:close()
+metadata:close()
