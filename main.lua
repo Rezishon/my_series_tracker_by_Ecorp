@@ -14,15 +14,6 @@ local data = {}
 
 dir_list = repo.list_of_dir(dir_path)
 
--- TODO: check if files format inserted =>
--- place it in the following gmatch
--- TODO: if metadata file presents =>
--- take the data from there, needed to
--- handle things on format inserted or not
--- and overwrite or not
--- TODO: Check how to know what length of video
--- does watched automatically
---
 for season_match in string.gmatch(dir_list, season_format) do
 	for full_match in string.gmatch(dir_list, season_match .. episode_format) do
 		for episode_match in string.gmatch(full_match, episode_format) do
