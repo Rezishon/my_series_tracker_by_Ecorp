@@ -29,4 +29,11 @@ Repository.path_fixer = function(path)
 	return path:gsub("%s*//%s*", "/")
 end
 
+Repository.comma_handler = function(database, comma_flag)
+	if comma_flag then
+		database:write(",")
+	end
+	return true
+end
+
 return Repository

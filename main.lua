@@ -11,12 +11,6 @@ local level_two_comma_flag = false
 local dir_list = ""
 local data = {}
 
-local comma_handler = function(database, comma_flag)
-	if comma_flag then
-		database:write(",")
-	end
-	return true
-end
 
 -- NOTE: This is a path fixer
 database_path = database_path:gsub("%s*//%s*", "/")
