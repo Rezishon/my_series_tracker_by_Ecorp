@@ -5,7 +5,7 @@ Repository.database_path = function(dir_path)
 end
 
 Repository.metadata_path = function(dir_path)
-	return dir_path .. "/.metadata.json"
+	return dir_path .. "/.metadata.ini"
 end
 
 Repository.dir_path_validator = function(dir_path)
