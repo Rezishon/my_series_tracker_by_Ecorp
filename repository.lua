@@ -1,7 +1,7 @@
 Repository = {}
 
 Repository.database_path = function(dir_path)
-	return dir_path .. "/.database.json"
+	return dir_path .. "/.database.ini"
 end
 
 Repository.metadata_path = function(dir_path)
