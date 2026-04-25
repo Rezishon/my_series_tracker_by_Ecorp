@@ -41,6 +41,19 @@ Repository.season_and_episode_structure_builder = function(dir_list, season_patt
 	local data = {}
 	for season_match in string.gmatch(dir_list, season_pattern) do
 		for full_match in string.gmatch(dir_list, season_match .. episode_pattern) do
+		if first_season_flag then
+			table.insert(seasons, season_match)
+			first_season_flag = false
+		end
+
+		for _, v in ipairs(seasons) do
+			if v == season_match then
+				add_access_flag = false
+			else
+				add_access_flag = true
+			end
+		end
+
 			for episode_match in string.gmatch(full_match, episode_pattern) do
 				if data[season_match] == nil then
 					data[season_match] = {}
