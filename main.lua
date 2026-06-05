@@ -17,19 +17,9 @@ seasons, episodes = repo.season_and_episode_structure_builder(dir_list, season_p
 
 local database = io.open(database_path, "w")
 repo.season_and_episode_structure_writer(database, seasons, episodes)
-database = io.open(database_path, "w+")
-repo.database_file_organizer(database, database_path)
-
 database:close()
-
-local metadata_table = {
-	SeasonPattern = season_pattern,
-	EpisodePattern = episode_pattern,
-}
 
 local metadata = io.open(metadata_path, "w")
 repo.metadata_structure_writer(metadata, season_pattern, episode_pattern)
-metadata = io.open(metadata_path, "w+")
-repo.metadata_file_organizer(metadata, metadata_path)
 
 metadata:close()
