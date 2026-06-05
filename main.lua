@@ -7,12 +7,13 @@ local episode_pattern = arg[3]
 local database_path = repo.path_fixer(repo.database_path(dir_path))
 local metadata_path = repo.path_fixer(repo.metadata_path(dir_path))
 local dir_list = ""
-local data = {}
+local seasons = {}
+local episodes = {}
 
 
 dir_list = repo.list_of_dir(dir_path)
 
-data = repo.season_and_episode_structure_builder(dir_list, season_pattern, episode_pattern)
+seasons, episodes = repo.season_and_episode_structure_builder(dir_list, season_pattern, episode_pattern)
 
 local database = io.open(database_path, "w")
 repo.season_and_episode_structure_writer(database, seasons, episodes)
