@@ -79,9 +79,6 @@ Repository.season_and_episode_structure_builder = function(dir_list, season_patt
 	return seasons, episodes
 end
 
-Repository.comma_handler = function(database, comma_flag)
-	if comma_flag then
-		database:write(",")
 Repository.season_and_episode_structure_writer = function(database, seasons, episodes)
 	local episodes_items = Repository.table_splitter(episodes, "end")
 	for i, v in ipairs(seasons) do
@@ -104,7 +101,6 @@ Repository.metadata_structure_writer = function(metadata, season_pattern, episod
 	metadata:write("episode=" .. episode_pattern)
 end
 
-		database:write('"' .. i .. '"' .. ":{" .. "\n")
 Repository.table_splitter = function(t, delimiter)
 	local result = {}
 	local tmp_result = {}
@@ -123,8 +119,6 @@ Repository.table_splitter = function(t, delimiter)
 	return result
 end
 
-			database:write('"' .. ii .. '"' .. ":")
-			database:write('{ "watched" : false, "timeOfWatch" : "00:00" }')
 Repository.table_joiner = function(t, delimiter)
 	local result = {}
 
@@ -144,7 +138,6 @@ Repository.string_splitter = function(s, delimiter)
 	local result = {}
 	for match in string.gmatch(s, "[^" .. delimiter .. "]+") do
 		table.insert(result, match)
-		database:write("\n}")
 	end
 	return result
 end
@@ -154,9 +147,6 @@ Repository.read_file_line_by_line = function(file)
 	local tmp_data
 	while true do
 		tmp_data = file:read("*l")
-Repository.metadata_structure_writer = function(metadata, data, level_one_comma_flag)
-	metadata:write("{\n")
-	for i, v in pairs(data) do
 
 		if not tmp_data then
 			break
@@ -165,13 +155,7 @@ Repository.metadata_structure_writer = function(metadata, data, level_one_comma_
 		table.insert(result, tmp_data)
 	end
 
-Repository.database_file_organizer = function(file, database_path)
-	local json_file = io.popen(
-		"jq 'to_entries | sort_by(.key) | from_entries | .[] |= (to_entries | sort_by(.key) | from_entries)' "
-			.. database_path
-	)
-	file:write(json_file:read("*a"))
-	json_file:close()
+	return result
 end
 
 Repository.metadata_file_parser = function(metadata_line_by_line, season_key_pattern, episode_key_patterna)
@@ -197,10 +181,6 @@ Repository.metadata_file_parser = function(metadata_line_by_line, season_key_pat
 	end
 
 	return season_pattern, episode_pattern
-Repository.metadata_file_organizer = function(file, metadata_path)
-	local json_file = io.popen("jq 'to_entries | sort_by(.key) | from_entries' " .. metadata_path)
-	file:write(json_file:read("*a"))
-	json_file:close()
 end
 
 return Repository
