@@ -1,3 +1,16 @@
+local function executer(status)
+	local item = vlc.input.item()
+	local input = vlc.object.input()
+	local time = vlc.var.get(input, "time")
+	local title = file_name_finder()
+
+	local exec = io.popen(command_builder(item, title, status, time))
+	vlc.msg.info("==========================================")
+	vlc.msg.info(command_builder(item, title, status, time))
+	vlc.msg.info(exec:read("*a"))
+	exec:close()
+end
+
 function descriptor()
 	return {
 		title = "Series Tracker",
