@@ -8,3 +8,8 @@ local database_data_line_by_line = {}
 local recommend_item = { season = "", episode = "" }
 local current_season = ""
 
+
+local database_file = io.open(database_path, "r")
+database_data_line_by_line = repo.read_file_line_by_line(database_file)
+database_file = io.open(database_path, "r")
+
