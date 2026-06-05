@@ -88,3 +88,13 @@ if database_data[#database_data] == "[episode]" then
 	end
 end
 
+for i = #database_data + 1, #database_line_by_line do
+	table.insert(database_data, database_line_by_line[i])
+end
+
+database_file = io.open(database_path, "w+")
+for _, v in ipairs(database_data) do
+	database_file:write(v .. "\n")
+end
+
+database_file:close()
