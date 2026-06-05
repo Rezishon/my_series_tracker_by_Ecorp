@@ -50,3 +50,19 @@ if season_validation_flag == false or episode_validation_flag == false then
 	os.exit(1, true)
 end
 
+database_file = io.open(database_path, "r")
+local database_data = {}
+
+while true do
+	table.insert(database_data, database_file:read("*l"))
+	if database_data[#database_data] == "[season]" then
+		table.insert(database_data, database_file:read("*l"))
+
+		local tmp_value = repo.string_splitter(database_data[#database_data], "=")
+
+		if tmp_file_metadata.season == tmp_value[1] then
+			break
+		end
+	end
+end
+
