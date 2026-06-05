@@ -13,3 +13,40 @@ local database_file = io.open(database_path, "r")
 database_data_line_by_line = repo.read_file_line_by_line(database_file)
 database_file = io.open(database_path, "r")
 
+local database_data = {}
+
+::find_new_season::
+while true do
+	table.insert(database_data, database_file:read("*l"))
+	if database_data[#database_data] == "[season]" then
+		table.insert(database_data, database_file:read("*l"))
+
+		local tmp_value = repo.string_splitter(database_data[#database_data], "=")
+
+		if tmp_value[2] == "false" then
+			recommend_item.season = tmp_value[1]
+			break
+    elseif tmp_value[2] == "true" then
+      goto find_new_season
+		end
+	elseif database_data[#database_data] == '' and #database_data == #database_data_line_by_line then
+		io.stderr:write("\n\27[31mNo video found to watch :(\n")
+		os.exit(1, true)
+	end
+end
+
+table.insert(database_data, database_file:read("*l"))
+if database_data[#database_data] == "[episode]" then
+	while true do
+		table.insert(database_data, database_file:read("*l"))
+		local tmp_value = repo.string_splitter(database_data[#database_data], "=")
+
+		if tmp_value[1] == nil then
+      goto find_new_season
+		elseif string.match(tmp_value[2], "false") == "false" then
+			recommend_item.episode = tmp_value[1]
+			break
+		end
+	end
+end
+
