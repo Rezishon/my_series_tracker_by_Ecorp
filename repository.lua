@@ -61,6 +61,10 @@ Repository.season_and_episode_structure_builder = function(dir_list, season_patt
 			end
 		end
 
+		if add_access_flag then
+			table.insert(seasons, season_match)
+		end
+	end
 			for episode_match in string.gmatch(full_match, episode_pattern) do
 				if data[season_match] == nil then
 					data[season_match] = {}
