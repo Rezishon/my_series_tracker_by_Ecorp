@@ -98,6 +98,11 @@ Repository.season_and_episode_structure_writer = function(database, seasons, epi
 	end
 end
 
+Repository.metadata_structure_writer = function(metadata, season_pattern, episode_pattern)
+	metadata:write("[pattern]\n")
+	metadata:write("season=" .. season_pattern .. "\n")
+	metadata:write("episode=" .. episode_pattern)
+end
 
 		database:write('"' .. i .. '"' .. ":{" .. "\n")
 
