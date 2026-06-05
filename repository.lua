@@ -140,9 +140,13 @@ Repository.table_joiner = function(t, delimiter)
 	return result
 end
 
+Repository.string_splitter = function(s, delimiter)
+	local result = {}
+	for match in string.gmatch(s, "[^" .. delimiter .. "]+") do
+		table.insert(result, match)
 		database:write("\n}")
 	end
-	database:write("\n}")
+	return result
 end
 
 Repository.metadata_structure_writer = function(metadata, data, level_one_comma_flag)
