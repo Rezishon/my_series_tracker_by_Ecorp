@@ -50,3 +50,12 @@ if database_data[#database_data] == "[episode]" then
 	end
 end
 
+local dir_list = repo.list_of_dir(dir_path)
+dir_list = repo.string_splitter(dir_list, '\n')
+local file_name = ''
+for _,v in ipairs(dir_list) do
+  if string.match(v, recommend_item.season) and string.match(v, recommend_item.episode) then
+    file_name = v
+  end
+end
+
