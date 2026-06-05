@@ -149,15 +149,21 @@ Repository.string_splitter = function(s, delimiter)
 	return result
 end
 
+Repository.read_file_line_by_line = function(file)
+	local result = {}
+	local tmp_data
+	while true do
+		tmp_data = file:read("*l")
 Repository.metadata_structure_writer = function(metadata, data, level_one_comma_flag)
 	metadata:write("{\n")
 	for i, v in pairs(data) do
-		level_one_comma_flag = Repository.comma_handler(metadata, level_one_comma_flag)
 
-		metadata:write('"' .. i .. '"' .. ":" .. '"' .. v .. '"')
+		if not tmp_data then
+			break
+		end
+
+		table.insert(result, tmp_data)
 	end
-	metadata:write("\n}")
-end
 
 Repository.database_file_organizer = function(file, database_path)
 	local json_file = io.popen(
