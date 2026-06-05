@@ -66,3 +66,25 @@ while true do
 	end
 end
 
+table.insert(database_data, database_file:read("*l"))
+if database_data[#database_data] == "[episode]" then
+	while true do
+		table.insert(database_data, database_file:read("*l"))
+		local tmp_value = repo.string_splitter(database_data[#database_data], "=")
+
+		if tmp_file_metadata.episode == tmp_value[1] then
+			if string.match(database_data[#database_data], "false") then
+				database_data[#database_data] = string.gsub(database_data[#database_data], "false", watch_status)
+			elseif string.match(database_data[#database_data], "true") then
+				database_data[#database_data] = string.gsub(database_data[#database_data], "true", watch_status)
+			end
+			database_data[#database_data] = string.gsub(database_data[#database_data], ",%d+.*", "," .. watched_time)
+
+			break
+		elseif tmp_value[1] == nil then
+			io.stderr:write("\n\27[31mThe given file didn't found!\n")
+			break
+		end
+	end
+end
+
