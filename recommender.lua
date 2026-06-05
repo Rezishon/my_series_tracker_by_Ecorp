@@ -59,3 +59,16 @@ for _,v in ipairs(dir_list) do
   end
 end
 
+print("Do you want to watch?\tY/n")
+print("Season: " .. recommend_item.season  )
+print("Episode: " .. recommend_item.episode)
+local input = io.read(1)
+if input == 'y' or input == 'Y' or input == '\n'  then
+  print("xdg-open " .. dir_path .."/" .. file_name)
+  local exec = io.popen("xdg-open " .. dir_path .."/" .. file_name)
+  exec:close()
+  os.exit(0, true)
+else
+  print("Maybe we will watch it next time :)")
+end
+
