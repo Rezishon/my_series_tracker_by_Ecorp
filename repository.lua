@@ -64,15 +64,19 @@ Repository.season_and_episode_structure_builder = function(dir_list, season_patt
 			table.insert(seasons, season_match)
 		end
 	end
+
+	for _, season in ipairs(seasons) do
+		for full_match in string.gmatch(dir_list, season .. episode_pattern) do
 			for episode_match in string.gmatch(full_match, episode_pattern) do
-				if data[season_match] == nil then
-					data[season_match] = {}
-				end
-				data[season_match][episode_match] = false
+				table.insert(episodes, episode_match)
 			end
 		end
+		table.insert(episodes, "end")
 	end
-	return data
+
+	table.remove(episodes, #episodes)
+
+	return seasons, episodes
 end
 
 Repository.comma_handler = function(database, comma_flag)
