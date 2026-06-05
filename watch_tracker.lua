@@ -23,3 +23,9 @@ metadata.season_pattern, metadata.episode_pattern = repo.metadata_file_parser(
 	metadata_key_patterns.episode_key_pattern
 )
 
+local tmp_file_metadata = {}
+for match in string.gmatch(file_name, metadata.season_pattern .. metadata.episode_pattern) do
+	tmp_file_metadata.season = string.match(match, metadata.season_pattern)
+	tmp_file_metadata.episode = string.match(match, metadata.episode_pattern)
+end
+
