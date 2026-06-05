@@ -1,3 +1,4 @@
+package.path = package.path .. ";/your/absolute/directory/to/repository.lua"
 local repo = require("repository")
 
 local dir_path = arg[1]
