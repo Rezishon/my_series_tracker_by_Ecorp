@@ -6,8 +6,6 @@ local season_pattern = arg[2]
 local episode_pattern = arg[3]
 local database_path = repo.path_fixer(repo.database_path(dir_path))
 local metadata_path = repo.path_fixer(repo.metadata_path(dir_path))
-local level_one_comma_flag = false
-local level_two_comma_flag = false
 local dir_list = ""
 local data = {}
 
@@ -17,8 +15,7 @@ dir_list = repo.list_of_dir(dir_path)
 data = repo.season_and_episode_structure_builder(dir_list, season_pattern, episode_pattern)
 
 local database = io.open(database_path, "w")
-repo.season_and_episode_structure_writer(database, data, level_one_comma_flag, level_two_comma_flag)
-
+repo.season_and_episode_structure_writer(database, seasons, episodes)
 database = io.open(database_path, "w+")
 repo.database_file_organizer(database, database_path)
 
@@ -30,8 +27,7 @@ local metadata_table = {
 }
 
 local metadata = io.open(metadata_path, "w")
-repo.metadata_structure_writer(metadata, metadata_table, level_one_comma_flag)
-
+repo.metadata_structure_writer(metadata, season_pattern, episode_pattern)
 metadata = io.open(metadata_path, "w+")
 repo.metadata_file_organizer(metadata, metadata_path)
 
