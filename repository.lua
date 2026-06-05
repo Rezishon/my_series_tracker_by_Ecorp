@@ -47,7 +47,6 @@ Repository.season_and_episode_structure_builder = function(dir_list, season_patt
 	local add_access_flag = true
 
 	for season_match in string.gmatch(dir_list, season_pattern) do
-		for full_match in string.gmatch(dir_list, season_match .. episode_pattern) do
 		if first_season_flag then
 			table.insert(seasons, season_match)
 			first_season_flag = false
