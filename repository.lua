@@ -1,6 +1,9 @@
 Repository = {}
 
-Repository.database_path = function(dir_path)
+Repository.database_path = function(dir_path, prefix)
+	if prifix then
+		return dir_path .. "/." .. prefix .. ".database.ini"
+	end
 	return dir_path .. "/.database.ini"
 end
 
