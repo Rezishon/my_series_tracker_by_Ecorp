@@ -174,6 +174,29 @@ Repository.database_file_organizer = function(file, database_path)
 	json_file:close()
 end
 
+Repository.metadata_file_parser = function(metadata_line_by_line, season_key_pattern, episode_key_patterna)
+	local validation_flag = false
+	local season_pattern = ""
+	local episode_pattern = ""
+
+	for _, v in ipairs(metadata_line_by_line) do
+		if not validation_flag and v == "[pattern]" then
+			validation_flag = true
+			goto continue
+		end
+
+		if "season=" == string.match(v, season_key_pattern) then
+			local _, season_end_index = string.find(v, season_key_pattern)
+			season_pattern = string.sub(v, season_end_index + 1, #v)
+		elseif "episode=" == string.match(v, episode_key_patterna) then
+			local _, episode_end_index = string.find(v, episode_key_patterna)
+			episode_pattern = string.sub(v, episode_end_index + 1, #v)
+		end
+
+		::continue::
+	end
+
+	return season_pattern, episode_pattern
 Repository.metadata_file_organizer = function(file, metadata_path)
 	local json_file = io.popen("jq 'to_entries | sort_by(.key) | from_entries' " .. metadata_path)
 	file:write(json_file:read("*a"))
