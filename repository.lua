@@ -41,7 +41,11 @@ Repository.list_of_dir = function(dir_path)
 end
 
 Repository.season_and_episode_structure_builder = function(dir_list, season_pattern, episode_pattern)
-	local data = {}
+	local seasons = {}
+	local episodes = {}
+	local first_season_flag = true
+	local add_access_flag = true
+
 	for season_match in string.gmatch(dir_list, season_pattern) do
 		for full_match in string.gmatch(dir_list, season_match .. episode_pattern) do
 		if first_season_flag then
