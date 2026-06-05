@@ -82,14 +82,22 @@ end
 Repository.comma_handler = function(database, comma_flag)
 	if comma_flag then
 		database:write(",")
+Repository.season_and_episode_structure_writer = function(database, seasons, episodes)
+	local episodes_items = Repository.table_splitter(episodes, "end")
+	for i, v in ipairs(seasons) do
+		database:write("[season]\n")
+
+		database:write(v .. "=false\n")
+
+		database:write("[episode]\n")
+
+		for _, vv in ipairs(episodes_items[i]) do
+			database:write(vv .. "=false,0\n")
+		end
+		database:write("\n")
 	end
-	return true
 end
 
-Repository.season_and_episode_structure_writer = function(database, data, level_one_comma_flag, level_two_comma_flag)
-	database:write("{\n")
-	for i, v in pairs(data) do
-		level_one_comma_flag = Repository.comma_handler(database, level_one_comma_flag)
 
 		database:write('"' .. i .. '"' .. ":{" .. "\n")
 
