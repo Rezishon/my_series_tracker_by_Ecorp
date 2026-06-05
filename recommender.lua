@@ -72,3 +72,5 @@ else
   print("Maybe we will watch it next time :)")
 end
 
+
+database_file:close()
