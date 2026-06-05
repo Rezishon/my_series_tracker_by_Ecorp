@@ -1,3 +1,17 @@
+local function command_builder(item, title, status, time)
+	return "lua"
+		.. " "
+		.. "/your/absolute/directory/to/watch_tracker.lua"
+		.. " "
+		.. path_finder(item:uri())
+		.. " "
+		.. title
+		.. " "
+		.. tostring(status)
+		.. " "
+		.. math.floor(math.floor(math.floor(time) / 1000000) / 60)
+end
+
 local function executer(status)
 	local item = vlc.input.item()
 	local input = vlc.object.input()
