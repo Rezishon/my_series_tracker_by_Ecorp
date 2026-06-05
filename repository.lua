@@ -125,8 +125,20 @@ end
 
 			database:write('"' .. ii .. '"' .. ":")
 			database:write('{ "watched" : false, "timeOfWatch" : "00:00" }')
+Repository.table_joiner = function(t, delimiter)
+	local result = {}
+
+	for _, v in ipairs(t) do
+		for _, vv in ipairs(v) do
+			table.insert(result, vv)
 		end
-		level_two_comma_flag = false
+		table.insert(result, delimiter)
+	end
+
+	table.remove(result, #result)
+
+	return result
+end
 
 		database:write("\n}")
 	end
