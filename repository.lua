@@ -105,9 +105,23 @@ Repository.metadata_structure_writer = function(metadata, season_pattern, episod
 end
 
 		database:write('"' .. i .. '"' .. ":{" .. "\n")
+Repository.table_splitter = function(t, delimiter)
+	local result = {}
+	local tmp_result = {}
 
-		for ii, vv in pairs(v) do
-			level_two_comma_flag = Repository.comma_handler(database, level_two_comma_flag)
+	for _, value in ipairs(t) do
+		if value ~= delimiter then
+			table.insert(tmp_result, value)
+		else
+			table.insert(result, tmp_result)
+			tmp_result = {}
+		end
+	end
+	table.insert(result, tmp_result)
+	tmp_result = {}
+
+	return result
+end
 
 			database:write('"' .. ii .. '"' .. ":")
 			database:write('{ "watched" : false, "timeOfWatch" : "00:00" }')
