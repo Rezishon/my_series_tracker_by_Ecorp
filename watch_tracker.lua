@@ -13,3 +13,13 @@ local metadata_key_patterns = {
 }
 local metadata = {}
 
+local metadata_file = io.open(metadata_path, "r")
+local metadata_data = repo.read_file_line_by_line(metadata_file)
+metadata_file:close()
+
+metadata.season_pattern, metadata.episode_pattern = repo.metadata_file_parser(
+	metadata_data,
+	metadata_key_patterns.season_key_pattern,
+	metadata_key_patterns.episode_key_pattern
+)
+
