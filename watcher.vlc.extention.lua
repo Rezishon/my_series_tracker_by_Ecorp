@@ -7,3 +7,10 @@ function descriptor()
 	}
 end
 
+function activate()
+	executer(true)
+end
+
+function deactivate()
+	executer(false)
+end
