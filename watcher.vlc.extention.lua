@@ -1,3 +1,11 @@
+local function path_finder(item_url)
+	local fixed_item_url = ""
+	fixed_item_url = string.gsub(item_url, "file:///%w*/user", "~")
+	fixed_item_url = string.gsub(fixed_item_url, file_name_finder(), "")
+
+	return fixed_item_url
+end
+
 local function command_builder(item, title, status, time)
 	return "lua"
 		.. " "
